@@ -1,0 +1,84 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color: #e6eef8;
+  font-family: "Manrope", sans-serif;
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: #07111f;
+  cursor: default;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.star-twinkle {
+  animation-name: star-twinkle;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  transform-origin: center;
+}
+
+@keyframes star-twinkle {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.45;
+  }
+
+  50% {
+    transform: scale(1.35);
+    opacity: 1;
+  }
+}
+
+a,
+button,
+input,
+select {
+  transition:
+    transform 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    color 180ms ease;
+}
+
+a:hover,
+button:hover {
+  cursor: pointer;
+}
+
+@media (pointer: fine) {
+  body,
+  a,
+  button,
+  input,
+  select,
+  textarea {
+    cursor: none;
+  }
+}
+
+::selection {
+  background: rgba(125, 211, 252, 0.3);
+  color: #fff;
+}
