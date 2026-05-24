@@ -33,7 +33,7 @@ export default function Register() {
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
       toast.success(`Welcome to SkillSphere, ${res.data.user.name || "creator"}!`);
-      navigate("/");
+      navigate("/profile");
     } catch (err) {
       const message = err.response?.data?.msg || "Registration failed";
       setError(message);

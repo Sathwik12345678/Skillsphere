@@ -18,6 +18,21 @@ const sanitizeUser = (user) => ({
   updatedAt: user.updatedAt,
 });
 
+const normalizeSkills = (skills) => {
+  if (Array.isArray(skills)) {
+    return skills.map((skill) => String(skill).trim()).filter(Boolean);
+  }
+
+  if (typeof skills === "string") {
+    return skills
+      .split(",")
+      .map((skill) => skill.trim())
+      .filter(Boolean);
+  }
+
+  return [];
+};
+
 exports.register = async (req, res) => {
   try {
     const { name, email, password, role, skills, bio } = req.body;
@@ -76,5 +91,88 @@ exports.login = async (req, res) => {
     return res.json({ token, user: sanitizeUser(user) });
   } catch (error) {
     return res.status(500).json({ msg: "Login failed", error: error.message });
+  }
+};
+
+exports.getProfile = async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select("-password");
+
+    if (!user) {
+      return res.status(404).json({ msg: "User not found" });
+    }
+
+    return res.json({ user: sanitizeUser(user) });
+  } catch (error) {
+    return res.status(500).json({ msg: "Could not load profile", error: error.message });
+  }
+};
+
+exports.updateProfile = async (req, res) => {
+  try {
+    const updates = {};
+    const { name, bio, skills } = req.body;
+
+    if (typeof name === "string") updates.name = name.trim();
+    if (typeof bio === "string") updates.bio = bio.trim();
+    if (skills !== undefined) updates.skills = normalizeSkills(skills);
+
+    const user = await User.findByIdAndUpdate(req.user.id, updates, {
+      new: true,
+      runValidators: true,
+    }).select("-password");
+
+    if (!user) {
+      return res.status(404).json({ msg: "User not found" });
+    }
+
+    return res.json({ user: sanitizeUser(user) });
+  } catch (error) {
+    return res.status(500).json({ msg: "Could not update profile", error: error.message });
+  }
+};
+
+exports.getUsers = async (req, res) => {
+  try {
+    const users = await User.find().select("-password").sort({ createdAt: -1 });
+    return res.json({ users: users.map(sanitizeUser) });
+  } catch (error) {
+    return res.status(500).json({ msg: "Could not load users", error: error.message });
+  }
+};
+
+exports.getDirectory = async (req, res) => {
+  try {
+    const users = await User.find({ _id: { $ne: req.user.id } })
+      .select("-password")
+      .sort({ name: 1 });
+
+    return res.json({ users: users.map(sanitizeUser) });
+  } catch (error) {
+    return res.status(500).json({ msg: "Could not load directory", error: error.message });
+  }
+};
+
+exports.updateUserRole = async (req, res) => {
+  try {
+    const { role } = req.body;
+
+    if (!["client", "freelancer", "admin"].includes(role)) {
+      return res.status(400).json({ msg: "Invalid role" });
+    }
+
+    const user = await User.findByIdAndUpdate(
+      req.params.id,
+      { role },
+      { new: true, runValidators: true }
+    ).select("-password");
+
+    if (!user) {
+      return res.status(404).json({ msg: "User not found" });
+    }
+
+    return res.json({ user: sanitizeUser(user) });
+  } catch (error) {
+    return res.status(500).json({ msg: "Could not update role", error: error.message });
   }
 };

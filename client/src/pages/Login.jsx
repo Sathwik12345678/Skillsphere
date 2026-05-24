@@ -22,7 +22,7 @@ export default function Login() {
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
       toast.success(`Welcome back, ${res.data.user.name || "creator"}!`);
-      navigate("/");
+      navigate("/dashboard");
     } catch (err) {
       const message = err.response?.data?.msg || "Login failed";
       setError(message);

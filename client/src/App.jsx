@@ -3,6 +3,10 @@ import { Toaster } from "react-hot-toast";
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Profile from "./pages/Profile";
+import Dashboard from "./pages/Dashboard";
+import Marketplace from "./pages/Marketplace";
+import Collaboration from "./pages/Collaboration";
 import SiteShell from "./layouts/SiteShell";
 
 function App() {
@@ -25,6 +29,10 @@ function App() {
           <Route path="/" element={<Landing />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/gigs" element={<Marketplace />} />
+          <Route path="/collaboration" element={<Collaboration />} />
         </Routes>
       </SiteShell>
     </>

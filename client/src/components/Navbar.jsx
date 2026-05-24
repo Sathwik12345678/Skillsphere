@@ -1,13 +1,33 @@
 import { motion } from "framer-motion";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 
-const navItems = [
+const guestNavItems = [
   { to: "/", label: "Home" },
+  { to: "/gigs", label: "Gigs" },
   { to: "/login", label: "Login" },
   { to: "/register", label: "Register" },
 ];
 
+const authedNavItems = [
+  { to: "/", label: "Home" },
+  { to: "/gigs", label: "Gigs" },
+  { to: "/collaboration", label: "Messages" },
+  { to: "/dashboard", label: "Dashboard" },
+  { to: "/profile", label: "Profile" },
+];
+
 export default function Navbar() {
+  const navigate = useNavigate();
+  useLocation();
+  const isAuthed = Boolean(localStorage.getItem("token"));
+  const navItems = isAuthed ? authedNavItems : guestNavItems;
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    navigate("/login");
+  };
+
   return (
     <motion.header
       initial={{ opacity: 0, y: -22 }}
@@ -44,6 +64,15 @@ export default function Navbar() {
               {item.label}
             </NavLink>
           ))}
+          {isAuthed ? (
+            <button
+              type="button"
+              onClick={logout}
+              className="rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-semibold text-slate-200 hover:bg-white/15 hover:text-white"
+            >
+              Logout
+            </button>
+          ) : null}
         </nav>
       </div>
     </motion.header>
