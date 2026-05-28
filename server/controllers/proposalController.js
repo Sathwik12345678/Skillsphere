@@ -125,6 +125,10 @@ exports.updateProposalStatus = async (req, res) => {
 
     proposal.status = status;
     await proposal.save();
+    if (status === "accepted") {
+      proposal.gig.status = "in_review";
+      await proposal.gig.save();
+    }
     await proposal.populate("freelancer", "name email role skills");
 
     await createNotification(req.app, {

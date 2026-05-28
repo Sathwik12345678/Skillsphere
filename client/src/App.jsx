@@ -7,6 +7,7 @@ import Profile from "./pages/Profile";
 import Dashboard from "./pages/Dashboard";
 import Marketplace from "./pages/Marketplace";
 import Collaboration from "./pages/Collaboration";
+import Payments from "./pages/Payments";
 import SiteShell from "./layouts/SiteShell";
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/gigs" element={<Marketplace />} />
+          <Route path="/payments" element={<Payments />} />
           <Route path="/collaboration" element={<Collaboration />} />
         </Routes>
       </SiteShell>

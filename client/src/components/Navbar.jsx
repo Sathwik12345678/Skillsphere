@@ -11,6 +11,7 @@ const guestNavItems = [
 const authedNavItems = [
   { to: "/", label: "Home" },
   { to: "/gigs", label: "Gigs" },
+  { to: "/payments", label: "Payments" },
   { to: "/collaboration", label: "Messages" },
   { to: "/dashboard", label: "Dashboard" },
   { to: "/profile", label: "Profile" },

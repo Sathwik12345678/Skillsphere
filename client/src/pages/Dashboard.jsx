@@ -29,6 +29,7 @@ export default function Dashboard() {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [users, setUsers] = useState([]);
+  const [adminOverview, setAdminOverview] = useState(null);
   const [loading, setLoading] = useState(true);
   const [updatingId, setUpdatingId] = useState("");
 
@@ -48,8 +49,12 @@ export default function Dashboard() {
         localStorage.setItem("user", JSON.stringify(nextUser));
 
         if (nextUser.role === "admin") {
-          const usersRes = await api.get("/auth/users");
+          const [usersRes, overviewRes] = await Promise.all([
+            api.get("/admin/users"),
+            api.get("/admin/overview"),
+          ]);
           setUsers(usersRes.data.users);
+          setAdminOverview(overviewRes.data);
         }
       } catch (error) {
         toast.error(error.response?.data?.msg || "Could not load dashboard");
@@ -81,6 +86,13 @@ export default function Dashboard() {
       setUpdatingId("");
     }
   };
+
+  const adminStats = [
+    ["Users", adminOverview?.stats?.totalUsers || 0],
+    ["Open gigs", adminOverview?.stats?.openGigs || 0],
+    ["Proposals", adminOverview?.stats?.totalProposals || 0],
+    ["Gross volume", `$${Number(adminOverview?.stats?.grossVolume || 0).toLocaleString()}`],
+  ];
 
   if (loading) {
     return (
@@ -127,8 +139,8 @@ export default function Dashboard() {
           <div className="rounded-[28px] border border-white/15 bg-white/10 p-6 shadow-[0_30px_120px_rgba(8,15,31,0.35)] backdrop-blur-2xl">
             <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
               <div>
-                <p className="text-sm uppercase tracking-[0.3em] text-amber-200">Week 2 workspace</p>
-                <h2 className="mt-2 font-display text-3xl font-bold text-white">Role-based next steps</h2>
+              <p className="text-sm uppercase tracking-[0.3em] text-amber-200">Week 4 workspace</p>
+              <h2 className="mt-2 font-display text-3xl font-bold text-white">Role-based next steps</h2>
               </div>
               <span className="rounded-full border border-emerald-300/30 bg-emerald-300/10 px-4 py-2 text-sm font-semibold text-emerald-200">
                 Active
@@ -144,6 +156,68 @@ export default function Dashboard() {
               ))}
             </div>
           </div>
+
+          {user?.role === "admin" ? (
+            <div className="rounded-[28px] border border-white/15 bg-white/10 p-6 shadow-[0_30px_120px_rgba(8,15,31,0.35)] backdrop-blur-2xl">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+                <div>
+                  <p className="text-sm uppercase tracking-[0.3em] text-emerald-200">Admin analytics</p>
+                  <h2 className="mt-2 font-display text-3xl font-bold text-white">Platform health</h2>
+                </div>
+                <Link
+                  to="/payments"
+                  className="rounded-2xl border border-white/20 bg-white/10 px-5 py-3 text-center font-semibold text-white hover:bg-white/15"
+                >
+                  Payment ledger
+                </Link>
+              </div>
+
+              <div className="mt-6 grid gap-4 md:grid-cols-4">
+                {adminStats.map(([label, value]) => (
+                  <div key={label} className="rounded-2xl border border-white/10 bg-white/10 p-4">
+                    <p className="text-sm text-slate-400">{label}</p>
+                    <p className="mt-2 text-2xl font-extrabold text-white">{value}</p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-6 grid gap-4 lg:grid-cols-2">
+                <div className="rounded-2xl border border-white/10 bg-white/10 p-4">
+                  <p className="font-semibold text-white">Recent gigs</p>
+                  <div className="mt-4 grid gap-3">
+                    {(adminOverview?.recent?.gigs || []).map((gig) => (
+                      <div key={gig._id} className="flex items-center justify-between gap-3 text-sm">
+                        <span className="text-slate-200">{gig.title}</span>
+                        <span className="rounded-full border border-cyan-300/25 bg-cyan-300/10 px-3 py-1 capitalize text-cyan-100">
+                          {gig.status?.replace("_", " ")}
+                        </span>
+                      </div>
+                    ))}
+                    {adminOverview?.recent?.gigs?.length ? null : (
+                      <p className="text-sm text-slate-400">No gig activity yet.</p>
+                    )}
+                  </div>
+                </div>
+
+                <div className="rounded-2xl border border-white/10 bg-white/10 p-4">
+                  <p className="font-semibold text-white">Recent payments</p>
+                  <div className="mt-4 grid gap-3">
+                    {(adminOverview?.recent?.payments || []).map((payment) => (
+                      <div key={payment._id} className="flex items-center justify-between gap-3 text-sm">
+                        <span className="text-slate-200">{payment.gig?.title || "Project payment"}</span>
+                        <span className="rounded-full border border-emerald-300/25 bg-emerald-300/10 px-3 py-1 capitalize text-emerald-100">
+                          {payment.status}
+                        </span>
+                      </div>
+                    ))}
+                    {adminOverview?.recent?.payments?.length ? null : (
+                      <p className="text-sm text-slate-400">No payment activity yet.</p>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          ) : null}
 
           {user?.role === "admin" ? (
             <div className="rounded-[28px] border border-white/15 bg-white/10 p-6 shadow-[0_30px_120px_rgba(8,15,31,0.35)] backdrop-blur-2xl">

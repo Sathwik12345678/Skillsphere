@@ -118,7 +118,7 @@ exports.updateProfile = async (req, res) => {
     if (skills !== undefined) updates.skills = normalizeSkills(skills);
 
     const user = await User.findByIdAndUpdate(req.user.id, updates, {
-      new: true,
+      returnDocument: "after",
       runValidators: true,
     }).select("-password");
 
@@ -164,7 +164,7 @@ exports.updateUserRole = async (req, res) => {
     const user = await User.findByIdAndUpdate(
       req.params.id,
       { role },
-      { new: true, runValidators: true }
+      { returnDocument: "after", runValidators: true }
     ).select("-password");
 
     if (!user) {
