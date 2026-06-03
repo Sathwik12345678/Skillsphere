@@ -24,6 +24,7 @@ const serializeMessage = (message) => ({
   conversation: message.conversation,
   sender: message.sender,
   body: message.body,
+  attachments: message.attachments,
   readBy: message.readBy,
   createdAt: message.createdAt,
   updatedAt: message.updatedAt,
@@ -102,7 +103,7 @@ exports.getMessages = async (req, res) => {
 
 exports.sendMessage = async (req, res) => {
   try {
-    const { body } = req.body;
+    const { body, attachments } = req.body;
 
     if (!body || !String(body).trim()) {
       return res.status(400).json({ msg: "Message cannot be empty" });
@@ -121,6 +122,7 @@ exports.sendMessage = async (req, res) => {
       conversation: conversation._id,
       sender: req.user.id,
       body: String(body).trim(),
+      attachments: Array.isArray(attachments) ? attachments : [],
       readBy: [req.user.id],
     });
 
@@ -152,5 +154,29 @@ exports.sendMessage = async (req, res) => {
     return res.status(201).json({ message: serializeMessage(message) });
   } catch (error) {
     return res.status(500).json({ msg: "Could not send message", error: error.message });
+  }
+};
+
+exports.markMessagesRead = async (req, res) => {
+  try {
+    const conversation = await Conversation.findById(req.params.id);
+
+    if (!conversation || !isParticipant(conversation, req.user.id)) {
+      return res.status(404).json({ msg: "Conversation not found" });
+    }
+
+    await Message.updateMany(
+      { conversation: conversation._id, readBy: { $ne: req.user.id } },
+      { $addToSet: { readBy: req.user.id } }
+    );
+
+    const messages = await Message.find({ conversation: conversation._id })
+      .populate("sender", "name email role")
+      .sort({ createdAt: 1 })
+      .limit(120);
+
+    return res.json({ messages: messages.map(serializeMessage) });
+  } catch (error) {
+    return res.status(500).json({ msg: "Could not mark messages read", error: error.message });
   }
 };

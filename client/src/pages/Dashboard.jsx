@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../services/api";
 import ButtonLoader from "../components/ButtonLoader";
+import { demoAdminOverview, demoUsers } from "../data/demoData";
 
 const roleCopy = {
   client: {
@@ -53,8 +54,8 @@ export default function Dashboard() {
             api.get("/admin/users"),
             api.get("/admin/overview"),
           ]);
-          setUsers(usersRes.data.users);
-          setAdminOverview(overviewRes.data);
+          setUsers((usersRes.data.users || []).length ? usersRes.data.users : demoUsers);
+          setAdminOverview(overviewRes.data?.stats ? overviewRes.data : demoAdminOverview);
         }
       } catch (error) {
         toast.error(error.response?.data?.msg || "Could not load dashboard");

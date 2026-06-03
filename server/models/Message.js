@@ -19,6 +19,13 @@ const messageSchema = new mongoose.Schema(
       trim: true,
       maxlength: 2000,
     },
+    attachments: [
+      {
+        name: { type: String, trim: true },
+        url: { type: String, trim: true },
+        type: { type: String, trim: true },
+      },
+    ],
     readBy: [
       {
         type: mongoose.Schema.Types.ObjectId,

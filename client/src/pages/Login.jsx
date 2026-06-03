@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../services/api";
 import ButtonLoader from "../components/ButtonLoader";
+
+const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 
 export default function Login() {
   const navigate = useNavigate();
@@ -11,6 +13,73 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [googleReady, setGoogleReady] = useState(false);
+  const [googleLoading, setGoogleLoading] = useState(false);
+
+  const handleGoogleCallback = async (response) => {
+    if (!response?.credential) {
+      toast.error("Google login failed");
+      return;
+    }
+
+    setGoogleLoading(true);
+    try {
+      const res = await api.post("/auth/google", { idToken: response.credential });
+      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("user", JSON.stringify(res.data.user));
+      toast.success(`Welcome back, ${res.data.user.name || "creator"}!`);
+      navigate("/dashboard");
+    } catch (err) {
+      const message = err.response?.data?.msg || "Google login failed";
+      toast.error(message);
+    } finally {
+      setGoogleLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (!GOOGLE_CLIENT_ID) return;
+
+    const loadGoogleScript = () => {
+      if (window.google?.accounts?.id) {
+        window.google.accounts.id.initialize({
+          client_id: GOOGLE_CLIENT_ID,
+          callback: handleGoogleCallback,
+        });
+        setGoogleReady(true);
+        return;
+      }
+
+      const script = document.createElement("script");
+      script.src = "https://accounts.google.com/gsi/client";
+      script.async = true;
+      script.onload = () => {
+        if (window.google?.accounts?.id) {
+          window.google.accounts.id.initialize({
+            client_id: GOOGLE_CLIENT_ID,
+            callback: handleGoogleCallback,
+          });
+          setGoogleReady(true);
+        }
+      };
+      document.body.appendChild(script);
+
+      return () => {
+        document.body.removeChild(script);
+      };
+    };
+
+    loadGoogleScript();
+  }, []);
+
+  const handleGoogleLogin = () => {
+    if (!googleReady || !window.google?.accounts?.id) {
+      toast.error("Google sign-in is not available");
+      return;
+    }
+
+    window.google.accounts.id.prompt();
+  };
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -53,7 +122,7 @@ export default function Login() {
           <div className="rounded-[28px] border border-white/10 bg-slate-950/30 p-6">
             <p className="text-sm uppercase tracking-[0.24em] text-amber-200">Experience</p>
             <p className="mt-3 text-lg text-white">
-              Glass surfaces, animated ambience, soft cursor trails, and instant feedback.
+              Glass surfaces, optimized ambience, native cursor response, and instant feedback.
             </p>
           </div>
         </div>
@@ -89,6 +158,17 @@ export default function Login() {
               {loading ? <ButtonLoader label="Logging in" /> : "Login"}
             </button>
           </form>
+
+          {GOOGLE_CLIENT_ID ? (
+            <button
+              type="button"
+              disabled={googleLoading}
+              onClick={handleGoogleLogin}
+              className="mt-4 w-full rounded-2xl border border-white/10 bg-slate-900/80 px-4 py-3 font-semibold text-white transition duration-300 hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-70"
+            >
+              {googleLoading ? "Signing in with Google..." : "Continue with Google"}
+            </button>
+          ) : null}
 
           <p className="mt-6 text-sm text-slate-300">
             Need an account?{" "}

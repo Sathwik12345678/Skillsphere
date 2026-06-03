@@ -29,9 +29,20 @@ const proposalSchema = new mongoose.Schema(
       trim: true,
       maxlength: 80,
     },
+    negotiatedAmount: {
+      type: Number,
+      min: 0,
+      default: 0,
+    },
+    clientNote: {
+      type: String,
+      trim: true,
+      maxlength: 800,
+      default: "",
+    },
     status: {
       type: String,
-      enum: ["submitted", "shortlisted", "accepted", "rejected"],
+      enum: ["submitted", "shortlisted", "negotiating", "accepted", "rejected"],
       default: "submitted",
     },
   },

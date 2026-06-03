@@ -1,0 +1,232 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [5 0 R 7 0 R 9 0 R 11 0 R 13 0 R] /Count 5 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Length 3570 >>
+stream
+BT /F1 20 Tf 1 0 0 1 54 730 Tm (SkillSphere Project Demo Guide) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 54 691 Tm (Project review date: 03 June 2026) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 54 677 Tm (Project: SkillSphere - Intelligent Internship, Jobs, Courses, and Freelance) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 54 663 Tm (Marketplace) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 54 649 Tm (Stack: React, Tailwind CSS, Framer Motion, Node.js, Express.js, MongoDB/Mongoose,) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 54 635 Tm (Socket.IO, JWT) Tj ET
+BT /F1 15 Tf 1 0 0 1 54 607 Tm (1. What SkillSphere Is) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 54 577 Tm (SkillSphere is a complete career ecosystem for students, interns, freelancers,) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 54 563 Tm (companies, and learners. It combines internships, job applications, freelance) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 54 549 Tm (projects, course enrollments, real-time collaboration, payments, review management,) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 54 535 Tm (and admin oversight into one unified web application.) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 54 514 Tm (This application is designed to support:) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 500 Tm (- Internship discovery, application, and management) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 486 Tm (- Job posting and candidate matching) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 472 Tm (- Freelance project listing and proposal workflows) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 458 Tm (- Paid course enrollment and learning records) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 444 Tm (- Real-time messaging, notifications, and collaboration) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 430 Tm (- Admin monitoring of users, gigs, payments, disputes, and revenue) Tj ET
+BT /F1 15 Tf 1 0 0 1 54 402 Tm (2. What We Built and Why It Matters) Tj ET
+BT /F1 12.5 Tf 1 0 0 1 54 367 Tm (Core product features) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 351 Tm (- Role-based registration and login for clients, freelancers, and admins) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 337 Tm (- Secure JWT authentication with protected routes) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 323 Tm (- Freelancer profile management with skills, portfolio, availability, pricing, and) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 309 Tm (reputation) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 295 Tm (- Marketplace listings for projects, internships, jobs, and courses) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 281 Tm (- Proposal and application flow for freelancers and interns) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 267 Tm (- Payment flow supporting escrow-style checkout and transaction tracking) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 253 Tm (- Real-time chat and notification system using Socket.IO) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 239 Tm (- Admin dashboard with analytics, user controls, and review/dispute oversight) Tj ET
+BT /F1 12.5 Tf 1 0 0 1 54 213 Tm (Why this fulfills the requirement) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 197 Tm (- The app is not just a job board; it is a multi-faceted internship and career) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 183 Tm (platform.) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 169 Tm (- It includes internships, jobs, freelance work, and course payments in one UX.) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 155 Tm (- It includes the backend architecture expected for a production-ready MERN app.) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 141 Tm (- It supports role-based data flows, provider-ready integrations, and demo-safe) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 127 Tm (operation.) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 113 Tm (- It preserves the existing UI while adding full functionality and validation.) Tj ET
+BT /F1 15 Tf 1 0 0 1 54 85 Tm (3. How We Fulfilled Their Requirements) Tj ET
+endstream
+endobj
+5 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 4 0 R >>
+endobj
+6 0 obj
+<< /Length 3631 >>
+stream
+BT /F1 12.5 Tf 1 0 0 1 54 738 Tm (Authentication and Access) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 722 Tm (- Implemented registration and login with JWT.) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 708 Tm (- Added client/freelancer/admin roles with protected route enforcement.) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 694 Tm (- Added email verification token flow and password reset token flow.) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 680 Tm (- Added demo two-factor authentication and Google login endpoint.) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 666 Tm (- Added provider-ready backend routes for external integrations.) Tj ET
+BT /F1 12.5 Tf 1 0 0 1 54 640 Tm (Marketplace and Matching) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 624 Tm (- Added gig listing support with type categories: projects, internships, jobs, and) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 610 Tm (courses.) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 596 Tm (- Added advanced listing details: skills, duration, location, pay, deadline.) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 582 Tm (- Added proposal/application submission, negotiation, and status updates.) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 568 Tm (- Added skill matching logic with score weighting for matches.) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 554 Tm (- Added trending skills and recommendation data.) Tj ET
+BT /F1 12.5 Tf 1 0 0 1 54 528 Tm (Profile and Portfolio) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 512 Tm (- Added profile fields: skills, expertise, portfolio items, resume link,) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 498 Tm (certifications, experience.) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 484 Tm (- Added hourly and milestone pricing, availability slots, and verification badge) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 470 Tm (metadata.) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 456 Tm (- Added reputation score and profile view tracking.) Tj ET
+BT /F1 12.5 Tf 1 0 0 1 54 430 Tm (Collaboration and Communication) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 414 Tm (- Added Socket.IO real-time messaging.) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 400 Tm (- Added notifications for new messages, proposals, payments, and status changes.) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 386 Tm (- Added conversation history and review submission.) Tj ET
+BT /F1 12.5 Tf 1 0 0 1 54 360 Tm (Payments and Escrow) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 344 Tm (- Added payment ledger and records, including pending, released, and refunded) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 330 Tm (states.) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 316 Tm (- Added provider-ready checkout support for Stripe and Razorpay.) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 302 Tm (- Added mock provider fallback so the app can demo without live payment keys.) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 288 Tm (- Added platform fee calculation and payment confirmation.) Tj ET
+BT /F1 12.5 Tf 1 0 0 1 54 262 Tm (Reviews and Disputes) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 246 Tm (- Added verified review handling with weighted reputation.) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 232 Tm (- Added dispute creation, evidence metadata, admin notes, and resolution status.) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 218 Tm (- Added admin access for dispute handling and platform safety.) Tj ET
+BT /F1 12.5 Tf 1 0 0 1 54 192 Tm (Admin Oversight) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 176 Tm (- Added admin dashboard with total users, payments, revenue, and gig activity.) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 162 Tm (- Added user role updates and platform analytics.) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 148 Tm (- Added admin logs for key actions.) Tj ET
+BT /F1 15 Tf 1 0 0 1 54 120 Tm (4. Technologies Used) Tj ET
+BT /F1 12.5 Tf 1 0 0 1 54 85 Tm (Frontend) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 69 Tm (- React 19) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 55 Tm (- Vite) Tj ET
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 6 0 R >>
+endobj
+8 0 obj
+<< /Length 3116 >>
+stream
+BT /F1 10.5 Tf 1 0 0 1 68 738 Tm (- Tailwind CSS) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 724 Tm (- Framer Motion) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 710 Tm (- React Router DOM) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 696 Tm (- Axios) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 682 Tm (- React Hot Toast) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 668 Tm (- Socket.IO client) Tj ET
+BT /F1 12.5 Tf 1 0 0 1 54 642 Tm (Backend) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 626 Tm (- Node.js + Express) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 612 Tm (- MongoDB + Mongoose) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 598 Tm (- Socket.IO server) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 584 Tm (- JSON Web Tokens \(JWT\)) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 570 Tm (- bcrypt for passwords) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 556 Tm (- Nodemailer provider-ready email support) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 542 Tm (- Cloudinary upload support) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 528 Tm (- Stripe and Razorpay provider-ready payment integration) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 514 Tm (- Redis readiness package support) Tj ET
+BT /F1 12.5 Tf 1 0 0 1 54 488 Tm (Deployment and Environment) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 472 Tm (- `.env` support for `MONGO_URI`, `JWT_SECRET`, `CLIENT_URL`, provider keys, and) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 458 Tm (feature flags) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 444 Tm (- CORS configured for the frontend origin) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 430 Tm (- Rate limiting and security headers) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 416 Tm (- Build-ready frontend and production preview) Tj ET
+BT /F1 15 Tf 1 0 0 1 54 388 Tm (5. What We Fixed and Verified) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 358 Tm (- Fixed Google login callback issues in the login page.) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 344 Tm (- Verified the client build completes successfully.) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 330 Tm (- Verified the backend starts cleanly and responds to `/api/health`.) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 316 Tm (- Verified the built frontend preview serves successfully on) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 302 Tm (`http://127.0.0.1:4173`.) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 288 Tm (- Preserved the existing UI and design while wiring functional backend support.) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 274 Tm (- Prepared a structured demo guide for a 5-minute screen-share presentation.) Tj ET
+BT /F1 15 Tf 1 0 0 1 54 246 Tm (6. Screen-Share Presentation Plan \(5 Minutes\)) Tj ET
+BT /F1 12.5 Tf 1 0 0 1 54 211 Tm (1. Start with the elevator pitch) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 54 195 Tm ("SkillSphere is a combined internship, job, freelance, and course marketplace built) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 54 181 Tm (for students and small companies.") Tj ET
+BT /F1 12.5 Tf 1 0 0 1 54 155 Tm (2. Landing page) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 139 Tm (- Show the product positioning and UI.) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 125 Tm (- Point out the search, AI match, stats, and service cards.) Tj ET
+BT /F1 12.5 Tf 1 0 0 1 54 99 Tm (3. Register/Login) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 83 Tm (- Show role selection on register.) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 69 Tm (- Show secure JWT login and protected access.) Tj ET
+endstream
+endobj
+9 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 8 0 R >>
+endobj
+10 0 obj
+<< /Length 2655 >>
+stream
+BT /F1 12.5 Tf 1 0 0 1 54 733 Tm (4. Marketplace) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 717 Tm (- Show internships, jobs, projects, and courses.) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 703 Tm (- Post a listing and submit a proposal.) Tj ET
+BT /F1 12.5 Tf 1 0 0 1 54 677 Tm (5. Profile) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 661 Tm (- Show freelancer profile details and pricing.) Tj ET
+BT /F1 12.5 Tf 1 0 0 1 54 635 Tm (6. Payments) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 619 Tm (- Show payment ledger and transaction summary.) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 605 Tm (- Explain provider-ready Stripe/Razorpay integration.) Tj ET
+BT /F1 12.5 Tf 1 0 0 1 54 579 Tm (7. Admin overview) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 563 Tm (- Show admin analytics and user controls.) Tj ET
+BT /F1 12.5 Tf 1 0 0 1 54 537 Tm (8. Close with readiness) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 521 Tm (- Emphasize that the platform is ready for internship review and can be extended) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 507 Tm (with live provider keys.) Tj ET
+BT /F1 15 Tf 1 0 0 1 54 479 Tm (7. Interview Notes) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 449 Tm (- Emphasize that the platform is not just a job board but a full career ecosystem.) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 435 Tm (- Mention provider-ready integration: Stripe/Razorpay, Google OAuth, Cloudinary,) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 421 Tm (SMTP.) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 407 Tm (- Highlight backend architecture: Express API, MongoDB data models, role-based) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 393 Tm (middleware, Socket.IO collaboration.) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 379 Tm (- Highlight frontend UX: responsive Tailwind design, animated transitions,) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 365 Tm (consistent branding.) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 351 Tm (- Note that live payment/email providers need keys, while demo flows work without) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 68 337 Tm (them.) Tj ET
+BT /F1 15 Tf 1 0 0 1 54 309 Tm (8. Running the App) Tj ET
+BT /F1 12.5 Tf 1 0 0 1 54 274 Tm (Backend) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 54 258 Tm (```bash) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 54 244 Tm (cd server) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 54 230 Tm (npm install) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 54 216 Tm (npm run dev) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 54 202 Tm (```) Tj ET
+BT /F1 12.5 Tf 1 0 0 1 54 176 Tm (Frontend) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 54 160 Tm (```bash) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 54 146 Tm (cd client) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 54 132 Tm (npm install) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 54 118 Tm (npm run dev) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 54 104 Tm (```) Tj ET
+BT /F1 12.5 Tf 1 0 0 1 54 78 Tm (Built preview) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 54 62 Tm (```bash) Tj ET
+endstream
+endobj
+11 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 10 0 R >>
+endobj
+12 0 obj
+<< /Length 239 >>
+stream
+BT /F1 10.5 Tf 1 0 0 1 54 738 Tm (cd client) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 54 724 Tm (npm run build) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 54 710 Tm (npm run preview -- --host 127.0.0.1 --port 4173) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 54 696 Tm (```) Tj ET
+endstream
+endobj
+13 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 12 0 R >>
+endobj
+xref
+0 14
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000141 00000 n 
+0000000211 00000 n 
+0000003833 00000 n 
+0000003959 00000 n 
+0000007642 00000 n 
+0000007768 00000 n 
+0000010936 00000 n 
+0000011062 00000 n 
+0000013770 00000 n 
+0000013898 00000 n 
+0000014189 00000 n 
+trailer
+<< /Size 14 /Root 1 0 R >>
+startxref
+14317
+%%EOF

@@ -2,6 +2,7 @@ const express = require("express");
 const {
   getConversations,
   getMessages,
+  markMessagesRead,
   sendMessage,
   startConversation,
 } = require("../controllers/conversationController");
@@ -12,6 +13,7 @@ const router = express.Router();
 router.get("/", authMiddleware, getConversations);
 router.post("/", authMiddleware, startConversation);
 router.get("/:id/messages", authMiddleware, getMessages);
+router.patch("/:id/read", authMiddleware, markMessagesRead);
 router.post("/:id/messages", authMiddleware, sendMessage);
 
 module.exports = router;

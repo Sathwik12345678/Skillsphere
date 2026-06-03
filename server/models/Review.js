@@ -30,6 +30,20 @@ const reviewSchema = new mongoose.Schema(
       trim: true,
       maxlength: 1000,
     },
+    verified: {
+      type: Boolean,
+      default: false,
+    },
+    weight: {
+      type: Number,
+      min: 1,
+      max: 3,
+      default: 1,
+    },
+    flagged: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );

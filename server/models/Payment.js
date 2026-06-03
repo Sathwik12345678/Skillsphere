@@ -61,13 +61,28 @@ const paymentSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ["pending", "paid", "released", "failed", "refunded"],
+      enum: ["pending", "paid", "released", "failed", "refunded", "disputed"],
       default: "pending",
     },
+    milestones: [
+      {
+        title: { type: String, trim: true },
+        amount: { type: Number, min: 0, default: 0 },
+        status: {
+          type: String,
+          enum: ["escrowed", "released", "refunded"],
+          default: "escrowed",
+        },
+        releasedAt: Date,
+      },
+    ],
     paidAt: {
       type: Date,
     },
     releasedAt: {
+      type: Date,
+    },
+    refundedAt: {
       type: Date,
     },
     notes: {

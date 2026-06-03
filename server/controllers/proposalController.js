@@ -9,6 +9,8 @@ const serializeProposal = (proposal) => ({
   coverLetter: proposal.coverLetter,
   bidAmount: proposal.bidAmount,
   timeline: proposal.timeline,
+  negotiatedAmount: proposal.negotiatedAmount,
+  clientNote: proposal.clientNote,
   status: proposal.status,
   createdAt: proposal.createdAt,
   updatedAt: proposal.updatedAt,
@@ -107,9 +109,9 @@ exports.getGigProposals = async (req, res) => {
 
 exports.updateProposalStatus = async (req, res) => {
   try {
-    const { status } = req.body;
+    const { status, negotiatedAmount, clientNote } = req.body;
 
-    if (!["submitted", "shortlisted", "accepted", "rejected"].includes(status)) {
+    if (!["submitted", "shortlisted", "negotiating", "accepted", "rejected"].includes(status)) {
       return res.status(400).json({ msg: "Invalid proposal status" });
     }
 
@@ -124,6 +126,12 @@ exports.updateProposalStatus = async (req, res) => {
     }
 
     proposal.status = status;
+    if (negotiatedAmount !== undefined) {
+      proposal.negotiatedAmount = Number(negotiatedAmount) || 0;
+    }
+    if (typeof clientNote === "string") {
+      proposal.clientNote = clientNote.trim();
+    }
     await proposal.save();
     if (status === "accepted") {
       proposal.gig.status = "in_review";

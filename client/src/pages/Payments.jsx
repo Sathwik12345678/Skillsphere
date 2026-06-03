@@ -1,9 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import toast from "react-hot-toast";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import api from "../services/api";
 import ButtonLoader from "../components/ButtonLoader";
+import { demoPayments } from "../data/demoData";
 
 const getStoredUser = () => {
   try {
@@ -28,18 +29,44 @@ const statusStyles = {
   refunded: "border-slate-300/30 bg-slate-300/10 text-slate-100",
 };
 
+const getCoursePayments = () => {
+  try {
+    return JSON.parse(localStorage.getItem("skillsphereCoursePayments")) || [];
+  } catch {
+    return [];
+  }
+};
+
 export default function Payments() {
   const navigate = useNavigate();
   const [user, setUser] = useState(getStoredUser);
   const [payments, setPayments] = useState([]);
   const [checkoutOptions, setCheckoutOptions] = useState([]);
+  const [coursePayments, setCoursePayments] = useState(getCoursePayments);
   const [loading, setLoading] = useState(true);
   const [workingId, setWorkingId] = useState("");
+  const [checkoutLoading, setCheckoutLoading] = useState(false);
+  const location = useLocation();
 
   const canCreateCheckout = user?.role === "client" || user?.role === "admin";
+  const normalizedCoursePayments = coursePayments.map((payment) => ({
+    _id: payment._id,
+    status: payment.status,
+    amount: payment.amount,
+    platformFee: 0,
+    currency: "INR",
+    provider: payment.provider,
+    providerOrderId: payment._id,
+    gig: { title: payment.course },
+    payer: { name: user?.name || "Learner" },
+    payee: { name: "SkillSphere Academy" },
+  }));
+  const shownPayments = payments.length || normalizedCoursePayments.length
+    ? [...normalizedCoursePayments, ...payments]
+    : demoPayments;
 
   const totals = useMemo(() => {
-    return payments.reduce(
+    return shownPayments.reduce(
       (summary, payment) => {
         if (["paid", "released"].includes(payment.status)) {
           summary.secured += Number(payment.amount || 0);
@@ -52,7 +79,7 @@ export default function Payments() {
       },
       { secured: 0, released: 0, fees: 0 }
     );
-  }, [payments]);
+  }, [shownPayments]);
 
   const loadPayments = async () => {
     setLoading(true);
@@ -69,6 +96,7 @@ export default function Payments() {
 
       const [paymentRes, optionRes] = await Promise.all(requests);
       setPayments(paymentRes.data.payments || []);
+      setCoursePayments(getCoursePayments());
       setCheckoutOptions(optionRes?.data?.proposals || []);
     } catch (error) {
       toast.error(error.response?.data?.msg || "Could not load payments");
@@ -88,8 +116,84 @@ export default function Payments() {
       return;
     }
 
+    const searchParams = new URLSearchParams(location.search);
+    const success = searchParams.get("success");
+    const cancelled = searchParams.get("cancelled");
+    const sessionId = searchParams.get("session_id");
+
+    if (success || sessionId) {
+      toast.success("Payment completed — loading latest status.");
+    }
+    if (cancelled) {
+      toast.error("Payment was cancelled.");
+    }
+
     loadPayments();
-  }, [navigate]);
+
+    if (success || cancelled || sessionId) {
+      window.history.replaceState(null, "", location.pathname);
+    }
+  }, [navigate, location.search]);
+
+  const loadRazorpayScript = () => {
+    return new Promise((resolve, reject) => {
+      if (window.Razorpay) {
+        return resolve(true);
+      }
+
+      const script = document.createElement("script");
+      script.src = "https://checkout.razorpay.com/v1/checkout.js";
+      script.async = true;
+      script.onload = () => resolve(true);
+      script.onerror = () => reject(new Error("Could not load Razorpay SDK"));
+      document.body.appendChild(script);
+    });
+  };
+
+  const openRazorpayCheckout = async (checkoutData, payment) => {
+    try {
+      await loadRazorpayScript();
+
+      const options = {
+        key: checkoutData.keyId,
+        amount: checkoutData.amount,
+        currency: checkoutData.currency,
+        name: checkoutData.name,
+        description: checkoutData.description,
+        order_id: checkoutData.orderId,
+        prefill: checkoutData.prefill,
+        notes: {
+          paymentId: payment._id,
+        },
+        theme: { color: "#14b8a6" },
+        handler: async (response) => {
+          setCheckoutLoading(true);
+          try {
+            await api.post(`/payments/${payment._id}/confirm`, {
+              providerPaymentId: response.razorpay_payment_id,
+              method: "card",
+            });
+            await loadPayments();
+            toast.success("Razorpay payment confirmed");
+          } catch (error) {
+            toast.error(error.response?.data?.msg || "Could not confirm Razorpay payment");
+          } finally {
+            setCheckoutLoading(false);
+          }
+        },
+        modal: {
+          ondismiss: () => {
+            toast.error("Razorpay checkout cancelled");
+          },
+        },
+      };
+
+      const razorpay = new window.Razorpay(options);
+      razorpay.open();
+    } catch (error) {
+      toast.error(error.message || "Could not open Razorpay checkout");
+    }
+  };
 
   const createCheckout = async (proposalId) => {
     setWorkingId(proposalId);
@@ -98,8 +202,18 @@ export default function Payments() {
       const res = await api.post("/payments/checkout", {
         proposalId,
         currency: "USD",
-        method: "mock",
+        method: "card",
       });
+
+      if (res.data.checkoutUrl) {
+        window.location.href = res.data.checkoutUrl;
+        return;
+      }
+
+      if (res.data.checkoutData?.provider === "razorpay") {
+        await openRazorpayCheckout(res.data.checkoutData, res.data.payment);
+      }
+
       setPayments((current) => {
         const exists = current.some((payment) => payment._id === res.data.payment._id);
         return exists
@@ -214,14 +328,16 @@ export default function Payments() {
         <section className="grid content-start gap-4">
           <div className="rounded-[28px] border border-white/15 bg-white/10 p-5 shadow-[0_30px_120px_rgba(8,15,31,0.35)] backdrop-blur-2xl">
             <p className="text-sm uppercase tracking-[0.3em] text-cyan-200">Ledger</p>
-            <h2 className="mt-2 font-display text-3xl font-bold text-white">{payments.length} payment records</h2>
+            <h2 className="mt-2 font-display text-3xl font-bold text-white">{shownPayments.length} payment records</h2>
+            {!payments.length ? <p className="mt-2 text-sm text-slate-300">Showing demo milestone activity until live payments exist.</p> : null}
           </div>
 
-          {payments.length ? (
-            payments.map((payment) => {
+          {shownPayments.length ? (
+            shownPayments.map((payment) => {
               const isPayer = String(payment.payer?._id || payment.payer) === String(user?._id);
-              const canConfirm = (isPayer || user?.role === "admin") && payment.status === "pending";
-              const canRelease = (isPayer || user?.role === "admin") && payment.status === "paid";
+              const isDemo = String(payment._id).startsWith("demo-");
+              const canConfirm = !isDemo && (isPayer || user?.role === "admin") && payment.status === "pending";
+              const canRelease = !isDemo && (isPayer || user?.role === "admin") && payment.status === "paid";
 
               return (
                 <article

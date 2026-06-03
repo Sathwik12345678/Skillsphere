@@ -31,6 +31,36 @@ const configureSocket = (io) => {
         socket.leave(`conversation:${conversationId}`);
       }
     });
+
+    socket.on("webrtc:join", (roomId) => {
+      if (roomId) {
+        socket.join(roomId);
+      }
+    });
+
+    socket.on("webrtc:leave", (roomId) => {
+      if (roomId) {
+        socket.leave(roomId);
+      }
+    });
+
+    socket.on("webrtc:offer", ({ roomId, offer }) => {
+      if (roomId && offer) {
+        socket.to(roomId).emit("webrtc:offer", { from: socket.user.id, offer });
+      }
+    });
+
+    socket.on("webrtc:answer", ({ roomId, answer }) => {
+      if (roomId && answer) {
+        socket.to(roomId).emit("webrtc:answer", { from: socket.user.id, answer });
+      }
+    });
+
+    socket.on("webrtc:candidate", ({ roomId, candidate }) => {
+      if (roomId && candidate) {
+        socket.to(roomId).emit("webrtc:candidate", { from: socket.user.id, candidate });
+      }
+    });
   });
 };
 

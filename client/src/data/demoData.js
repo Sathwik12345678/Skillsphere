@@ -1,0 +1,312 @@
+export const demoGigs = [
+  {
+    _id: "demo-gig-1",
+    listingType: "project",
+    title: "Build MERN Portfolio Website",
+    description:
+      "Create a fast personal portfolio with project cards, contact form, resume download, and clean deployment.",
+    category: "Web Development",
+    status: "open",
+    budget: 8000,
+    skills: ["React", "Node.js", "Tailwind", "MongoDB"],
+    proposalCount: 10,
+    deadline: new Date(Date.now() + 1000 * 60 * 60 * 24 * 12).toISOString(),
+    client: { _id: "demo-client-1", name: "Rohan Studio" },
+    distance: "2 km away",
+    match: "96% AI match",
+  },
+  {
+    _id: "demo-gig-2",
+    listingType: "project",
+    title: "AI Resume Builder",
+    description:
+      "Design and ship an AI-assisted resume builder with templates, PDF export, and role-based suggestions.",
+    category: "AI Services",
+    status: "open",
+    budget: 15000,
+    skills: ["OpenAI", "React", "PDF", "UX"],
+    proposalCount: 7,
+    deadline: new Date(Date.now() + 1000 * 60 * 60 * 24 * 18).toISOString(),
+    client: { _id: "demo-client-2", name: "CareerLift" },
+    distance: "5 km away",
+    match: "92% AI match",
+  },
+  {
+    _id: "demo-gig-3",
+    listingType: "project",
+    title: "Brand Kit and Social Media Designs",
+    description:
+      "Create a modern visual identity, Instagram launch posts, and reusable Canva/Figma templates.",
+    category: "UI/UX Design",
+    status: "open",
+    budget: 12000,
+    skills: ["Figma", "Branding", "Canva", "Illustration"],
+    proposalCount: 14,
+    deadline: new Date(Date.now() + 1000 * 60 * 60 * 24 * 9).toISOString(),
+    client: { _id: "demo-client-3", name: "Local Cafe Co." },
+    distance: "1.5 km away",
+    match: "89% AI match",
+  },
+  {
+    _id: "demo-internship-1",
+    listingType: "internship",
+    title: "Frontend Developer Internship",
+    description:
+      "Join a SaaS product team for a 12-week internship building React dashboards, reusable components, and API-driven workflows.",
+    category: "Web Development",
+    status: "open",
+    budget: 18000,
+    stipend: 18000,
+    skills: ["React", "JavaScript", "Tailwind", "Git"],
+    proposalCount: 42,
+    applicants: 42,
+    deadline: new Date(Date.now() + 1000 * 60 * 60 * 24 * 10).toISOString(),
+    client: { _id: "demo-client-4", name: "NovaCRM Labs" },
+    company: "NovaCRM Labs",
+    location: "Bengaluru / Remote",
+    duration: "12 weeks",
+    match: "94% role match",
+  },
+  {
+    _id: "demo-internship-2",
+    listingType: "internship",
+    title: "Data Analyst Internship",
+    description:
+      "Clean business datasets, create SQL reports, build Power BI dashboards, and present weekly insights to the growth team.",
+    category: "Data",
+    status: "open",
+    budget: 15000,
+    stipend: 15000,
+    skills: ["SQL", "Excel", "Power BI", "Python"],
+    proposalCount: 31,
+    applicants: 31,
+    deadline: new Date(Date.now() + 1000 * 60 * 60 * 24 * 14).toISOString(),
+    client: { _id: "demo-client-5", name: "FinSight Analytics" },
+    company: "FinSight Analytics",
+    location: "Hyderabad",
+    duration: "6 months",
+    match: "91% role match",
+  },
+  {
+    _id: "demo-job-1",
+    listingType: "job",
+    title: "Junior Full Stack Engineer",
+    description:
+      "Work on production MERN features, payment flows, admin tooling, and customer-facing performance improvements.",
+    category: "Web Development",
+    status: "open",
+    budget: 650000,
+    stipend: 650000,
+    skills: ["Node.js", "React", "MongoDB", "REST APIs"],
+    proposalCount: 58,
+    applicants: 58,
+    deadline: new Date(Date.now() + 1000 * 60 * 60 * 24 * 21).toISOString(),
+    client: { _id: "demo-client-6", name: "StackPilot" },
+    company: "StackPilot",
+    location: "Pune",
+    duration: "Full time",
+    match: "88% profile match",
+  },
+  {
+    _id: "demo-job-2",
+    listingType: "job",
+    title: "AI Automation Associate",
+    description:
+      "Build internal automations with LLM APIs, Zapier-style workflows, prompt evaluation sheets, and customer support copilots.",
+    category: "AI Services",
+    status: "open",
+    budget: 720000,
+    stipend: 720000,
+    skills: ["LLMs", "Python", "Automation", "APIs"],
+    proposalCount: 36,
+    applicants: 36,
+    deadline: new Date(Date.now() + 1000 * 60 * 60 * 24 * 16).toISOString(),
+    client: { _id: "demo-client-7", name: "AssistIQ" },
+    company: "AssistIQ",
+    location: "Remote India",
+    duration: "Full time",
+    match: "93% profile match",
+  },
+];
+
+export const demoCourses = [
+  {
+    _id: "demo-course-1",
+    title: "Full Stack MERN Career Bootcamp",
+    description:
+      "Build a job-ready portfolio with authentication, dashboards, payments, deployment, and interview-grade projects.",
+    category: "Web Development",
+    provider: "SkillSphere Academy",
+    company: "SkillSphere Academy",
+    price: 2499,
+    duration: "8 weeks",
+    lessons: 64,
+    rating: 4.8,
+    learners: 18420,
+    level: "Beginner to job-ready",
+    skills: ["React", "Node.js", "MongoDB", "Express", "Deployment"],
+  },
+  {
+    _id: "demo-course-2",
+    title: "AI Tools for Students and Freelancers",
+    description:
+      "Learn prompt design, AI research workflows, automation, resume projects, and client-ready AI service packages.",
+    category: "AI Services",
+    provider: "Coursera-style Partner",
+    company: "Coursera-style Partner",
+    price: 1499,
+    duration: "4 weeks",
+    lessons: 36,
+    rating: 4.7,
+    learners: 22910,
+    level: "Practical AI",
+    skills: ["Prompting", "OpenAI", "Automation", "Research", "No-code"],
+  },
+  {
+    _id: "demo-course-3",
+    title: "Data Analytics with Excel, SQL, and Power BI",
+    description:
+      "Go from raw data to portfolio dashboards using realistic business datasets, SQL joins, and executive reporting.",
+    category: "Data",
+    provider: "DataBridge Institute",
+    company: "DataBridge Institute",
+    price: 1999,
+    duration: "6 weeks",
+    lessons: 48,
+    rating: 4.9,
+    learners: 15760,
+    level: "Career certificate",
+    skills: ["Excel", "SQL", "Power BI", "Dashboards", "Analytics"],
+  },
+  {
+    _id: "demo-course-4",
+    title: "Product UI/UX Design Sprint",
+    description:
+      "Practice research, wireframes, design systems, mobile screens, prototypes, and portfolio case studies in Figma.",
+    category: "UI/UX Design",
+    provider: "DesignLab India",
+    company: "DesignLab India",
+    price: 1799,
+    duration: "5 weeks",
+    lessons: 41,
+    rating: 4.6,
+    learners: 11680,
+    level: "Portfolio focused",
+    skills: ["Figma", "UX Research", "Prototyping", "Design Systems"],
+  },
+  {
+    _id: "demo-course-5",
+    title: "Cloud and DevOps Foundations",
+    description:
+      "Deploy apps, understand Linux, Docker, CI/CD, cloud hosting, monitoring basics, and production troubleshooting.",
+    category: "Cloud",
+    provider: "CloudSprint",
+    company: "CloudSprint",
+    price: 2299,
+    duration: "7 weeks",
+    lessons: 52,
+    rating: 4.7,
+    learners: 9840,
+    level: "Foundation",
+    skills: ["Linux", "Docker", "CI/CD", "AWS", "Monitoring"],
+  },
+];
+
+export const demoUsers = [
+  { _id: "demo-user-1", name: "Aarav Mehta", email: "aarav@skillsphere.dev", role: "freelancer" },
+  { _id: "demo-user-2", name: "Nisha Rao", email: "nisha@skillsphere.dev", role: "freelancer" },
+  { _id: "demo-user-3", name: "Priya Sharma", email: "priya@skillsphere.dev", role: "client" },
+];
+
+export const demoPayments = [
+  {
+    _id: "demo-payment-1",
+    status: "paid",
+    amount: 8000,
+    platformFee: 800,
+    currency: "INR",
+    provider: "SkillSphere MockPay",
+    providerOrderId: "SS-DEMO-1001",
+    gig: { title: "Build MERN Portfolio Website" },
+    payer: { _id: "demo-client-1", name: "Rohan Studio" },
+    payee: { _id: "demo-user-1", name: "Aarav Mehta" },
+  },
+  {
+    _id: "demo-payment-2",
+    status: "released",
+    amount: 15000,
+    platformFee: 1500,
+    currency: "INR",
+    provider: "SkillSphere MockPay",
+    providerOrderId: "SS-DEMO-1002",
+    gig: { title: "AI Resume Builder" },
+    payer: { _id: "demo-client-2", name: "CareerLift" },
+    payee: { _id: "demo-user-2", name: "Nisha Rao" },
+  },
+];
+
+export const demoNotifications = [
+  {
+    _id: "demo-notification-1",
+    title: "New nearby project",
+    message: "AI Resume Builder is trending near you with a Rs. 15,000 budget.",
+    read: false,
+  },
+  {
+    _id: "demo-notification-2",
+    title: "Milestone secured",
+    message: "Payment for Build MERN Portfolio Website is now protected.",
+    read: false,
+  },
+];
+
+export const demoConversations = [
+  {
+    _id: "demo-conversation-1",
+    participants: [
+      { _id: "demo-user-current", name: "You" },
+      { _id: "demo-user-1", name: "Aarav Mehta" },
+    ],
+    lastMessage: "I can share the first homepage draft tonight.",
+    lastMessageAt: new Date().toISOString(),
+  },
+];
+
+export const demoMessages = [
+  {
+    _id: "demo-message-1",
+    conversation: "demo-conversation-1",
+    sender: { _id: "demo-user-1", name: "Aarav Mehta" },
+    body: "I reviewed the brief. A MERN portfolio with animations and contact flow is a good fit.",
+    createdAt: new Date(Date.now() - 1000 * 60 * 12).toISOString(),
+  },
+  {
+    _id: "demo-message-2",
+    conversation: "demo-conversation-1",
+    sender: "demo-user-current",
+    body: "Great. Please include a projects section and a clean mobile view.",
+    createdAt: new Date(Date.now() - 1000 * 60 * 8).toISOString(),
+  },
+];
+
+export const demoReviews = [
+  {
+    _id: "demo-review-1",
+    reviewer: { name: "Priya Sharma" },
+    rating: 5,
+    comment: "Fast delivery, clean communication, and strong UI taste.",
+  },
+];
+
+export const demoAdminOverview = {
+  stats: {
+    totalUsers: 128,
+    openGigs: 34,
+    totalProposals: 412,
+    grossVolume: 245000,
+  },
+  recent: {
+    gigs: demoGigs,
+    payments: demoPayments,
+  },
+};

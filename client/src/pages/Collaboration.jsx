@@ -5,6 +5,13 @@ import { io } from "socket.io-client";
 import { useNavigate } from "react-router-dom";
 import api from "../services/api";
 import ButtonLoader from "../components/ButtonLoader";
+import {
+  demoConversations,
+  demoMessages,
+  demoNotifications,
+  demoReviews,
+  demoUsers,
+} from "../data/demoData";
 
 const emptyReview = {
   reviewee: "",
@@ -86,14 +93,14 @@ export default function Collaboration() {
 
         const nextUser = profileRes.data.user;
         setUser(nextUser);
-        setDirectory(directoryRes.data.users || []);
-        setConversations(conversationRes.data.conversations || []);
-        setNotifications(notificationRes.data.notifications || []);
+        setDirectory((directoryRes.data.users || []).length ? directoryRes.data.users : demoUsers);
+        setConversations((conversationRes.data.conversations || []).length ? conversationRes.data.conversations : demoConversations);
+        setNotifications((notificationRes.data.notifications || []).length ? notificationRes.data.notifications : demoNotifications);
         localStorage.setItem("user", JSON.stringify(nextUser));
 
         const reviewRes = await api.get("/reviews", { params: { userId: nextUser._id } });
-        setReviews(reviewRes.data.reviews || []);
-        setAverageRating(reviewRes.data.averageRating || 0);
+        setReviews((reviewRes.data.reviews || []).length ? reviewRes.data.reviews : demoReviews);
+        setAverageRating(reviewRes.data.averageRating || 5);
       } catch (error) {
         toast.error(error.response?.data?.msg || "Could not load collaboration workspace");
         if (error.response?.status === 401) {
@@ -144,7 +151,11 @@ export default function Collaboration() {
     if (!activeConversation || !socketRef.current) return;
 
     socketRef.current.emit("conversation:join", activeConversation._id);
-    loadMessages(activeConversation);
+    if (String(activeConversation._id).startsWith("demo-")) {
+      setMessages(demoMessages);
+    } else {
+      loadMessages(activeConversation);
+    }
 
     return () => {
       socketRef.current?.emit("conversation:leave", activeConversation._id);
@@ -182,6 +193,21 @@ export default function Collaboration() {
     setSending(true);
 
     try {
+      if (String(activeConversation._id).startsWith("demo-")) {
+        setMessages((current) => [
+          ...current,
+          {
+            _id: `demo-message-${Date.now()}`,
+            conversation: activeConversation._id,
+            sender: user?._id,
+            body: messageBody,
+            createdAt: new Date().toISOString(),
+          },
+        ]);
+        setMessageBody("");
+        toast.success("Demo message sent");
+        return;
+      }
       const res = await api.post(`/conversations/${activeConversation._id}/messages`, {
         body: messageBody,
       });
